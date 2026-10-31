@@ -141,6 +141,32 @@
         { in: "https://example.com/a#section", out: "https://example.com/a" },
         { in: "https://example.com/a", out: "https://example.com/a" }
       ]
+    },
+    {
+      id: "break-at-stops",
+      name: "One line per sentence",
+      pitch: "Long paragraphs read better when every full stop starts a new line.",
+      note: "A newline is written after every '.' — and only after a '.', so abbreviations are not special-cased. It is a five-instruction change to the copy loop.",
+      source: [
+        "; write a newline after every full stop",
+        "loop:   IN  CLIPBOARD",
+        "        JZ  done",
+        "        MOV R1, R0",
+        "        OUT CLIPBOARD",
+        "        LDI 0x2E             ; '.'",
+        "        MOV R2, R0",
+        "        CMP R1, R2",
+        "        JNZ loop",
+        "        LDI 0x0A             ; newline",
+        "        OUT CLIPBOARD",
+        "        JMP loop",
+        "done:   HLT"
+      ].join("\n"),
+      examples: [
+        { in: "One. Two. Three.", out: "One.\n Two.\n Three.\n" },
+        { in: "no full stop here", out: "no full stop here" },
+        { in: "", out: "" }
+      ]
     }
   ];
 

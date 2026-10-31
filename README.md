@@ -2,12 +2,6 @@
 
 # Clip Loom
 
-<!-- shot:start -->
-
-![Screenshot](docs/shot.png)
-
-<!-- shot:end -->
-
 **Clean it before you paste it — with programs you can read.**
 
 [![Live demo](https://img.shields.io/badge/live-clean%20a%20link-b4482f?style=flat-square&labelColor=231d16)](https://drsamonline.github.io/app-clip-loom/)
@@ -27,7 +21,7 @@ A link with eleven tracking parameters. Text pulled out of a PDF with three spac
 paragraph going into a field that will not wrap. Clip Loom does those jobs with **programs you can read
 in full** — twenty lines of Weft-8 assembly each, running on a machine that lives in the page.
 
-## The four programs
+## The five programs
 
 | Program | What it does | The idea it uses |
 |---|---|---|
@@ -35,6 +29,7 @@ in full** — twenty lines of Weft-8 assembly each, running on a machine that li
 | **Squeeze runs of spaces** | `a    b` → `a b` | remember the *previous* byte in a register and compare |
 | **Wrap at 40 characters** | insert a newline every 40 | count down in a register and refill it — the same code for any length |
 | **Strip query and fragment** | cut at `?` and at `#` | two terminators instead of one |
+| **One line per sentence** | newline after every `.` | one more comparison in the copy loop |
 
 Every program reads one byte at a time from the `CLIPBOARD` port, decides, and writes. No regular
 expressions, no library, nothing you cannot follow with a pencil.
@@ -68,6 +63,22 @@ The program suite runs **every example each program ships** on the real machine,
 empty clipboard, text with no `?`, a run of five spaces, and a 120-character paragraph that must wrap
 into four lines with no character lost. It also checks the programs **bite**: delete the `?` comparison
 from program 01 and the example that says the query must go starts failing.
+
+
+## The Weft-8 family
+
+One machine, seven faces. Every one of these runs `weft8.js` from the Loom, byte for byte —
+learn it once and you have learned all seven.
+
+| | what it is |
+|---|---|
+| [the Loom](https://drsamonline.github.io/app-jacquard/) | the machine and its editor — where it all starts |
+| [Weft Puzzles](https://drsamonline.github.io/app-weft-puzzles/) | five puzzles solved in assembly, a robot on a grid |
+| **Clip Loom** (you are here) | clipboard programs you can read: strip, squeeze, wrap |
+| [Weft-8 on hardware](https://drsamonline.github.io/weft8-hardware/) | the same machine in C, three-way parity with the JS one |
+| [weft8-kit](https://drsamonline.github.io/weft8-kit/) | rules small enough to sign off |
+| [Weft-8 Classroom](https://drsamonline.github.io/weft8-classroom/) | eight exercises that teach how a computer works |
+| [Weft-8 beside x86 and ARM](https://drsamonline.github.io/weft8-compare/) | the same four jobs in three machines |
 
 ## Licence
 

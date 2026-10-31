@@ -18,7 +18,7 @@ const click = (id) => d.getElementById(id).dispatchEvent(new w.MouseEvent("click
 const t = (id) => d.getElementById(id).textContent;
 
 ok("the page boots without an error", errors.length === 0, errors.join("; "));
-ok("four programs are offered", d.querySelectorAll("#pick button").length === 4);
+ok("five programs are offered", d.querySelectorAll("#pick button").length === 5);
 ok("the program source is shown", /IN  CLIPBOARD/.test(t("src")));
 
 click("run");
