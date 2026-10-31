@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clip Loom — clipboard programs you can read</title>
+<meta name="description" content="Strip tracking parameters, squeeze spaces and wrap text before you paste — with programs written in Weft-8 assembly, the 8-bit machine from Jacquard. Offline, on your device.">
+<meta name="theme-color" content="#f7f1e6">
+<style>
+  :root{
+    --linen:#f7f1e6; --linen-2:#efe6d6; --ink:#231d16; --ink-2:#4a3f33; --mut:#7c6c58;
+    --thread:#b4482f; --thread-2:#8e3524; --sage:#4f7a5c; --line:#dbcdb6; --card:#fffaf0;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--linen);color:var(--ink);
+    font:14.5px/1.6 var(--mono);
+    background-image:repeating-linear-gradient(90deg,rgba(180,72,47,.045) 0 1px,transparent 1px 9px);}
+  a{color:var(--thread)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 18px 40px}
+
+  header{display:flex;align-items:center;gap:12px;padding:16px 0 12px;border-bottom:1px solid var(--line);margin-bottom:16px}
+  .spool{width:26px;height:26px;border-radius:50%;border:3px solid var(--thread);position:relative}
+  .spool:after{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--thread)}
+  h1{margin:0;font:600 15px/1.1 var(--mono);letter-spacing:.2em;text-transform:uppercase}
+  .sub{color:var(--mut);font-size:11.5px;letter-spacing:.05em}
+  header .r{margin-left:auto;font-size:11.5px;color:var(--mut);display:flex;gap:10px}
+  header .r a{text-decoration:none}
+
+  .stage{display:grid;grid-template-columns:1fr 300px 1fr;gap:14px;align-items:start}
+  @media (max-width:1000px){.stage{grid-template-columns:1fr}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 0 rgba(35,29,22,.04)}
+  .card .h{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid var(--line);
+    font:600 10.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+  .card .h .n{margin-left:auto;color:var(--thread);letter-spacing:0;text-transform:none;font-weight:500}
+  .card .b{padding:12px}
+
+  textarea{width:100%;height:250px;border:1px solid var(--line);border-radius:8px;background:#fffdf8;
+    color:var(--ink);padding:11px;font:13px/1.6 var(--mono);resize:vertical;white-space:pre-wrap}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+  button{font:600 12.5px/1 var(--mono);border-radius:7px;padding:10px 13px;cursor:pointer;border:1px solid var(--thread);
+    background:var(--thread);color:#fff8f0}
+  button:hover{background:var(--thread-2);border-color:var(--thread-2)}
+  button.gh{background:transparent;color:var(--ink-2);border:1px solid var(--line)}
+  button.gh:hover{border-color:var(--thread);color:var(--thread);background:transparent}
+
+  /* the program chooser */
+  .pick{list-style:none;margin:0;padding:0}
+  .pick li{margin:0 0 8px}
+  .pick button{width:100%;text-align:left;background:transparent;border:1px solid var(--line);color:var(--ink);
+    padding:10px 11px;border-radius:8px;font:600 12.5px/1.35 var(--mono)}
+  .pick button:hover{border-color:var(--thread);background:#fff5ea}
+  .pick button[aria-current="true"]{border-color:var(--thread);background:#fdeee6;box-shadow:inset 3px 0 0 var(--thread)}
+  .pick .pitch{display:block;color:var(--mut);font:400 11.5px/1.45 var(--mono);margin-top:4px}
+
+  .note{color:var(--mut);font-size:12px;margin:10px 0 0}
+  pre.src{margin:0;background:#fbf6ec;border:1px solid var(--line);border-radius:8px;padding:11px;
+    font:12px/1.7 var(--mono);color:var(--ink-2);overflow:auto;max-height:260px;white-space:pre}
+  .out{background:#fffdf8;border:1px solid var(--line);border-radius:8px;padding:11px;min-height:250px;
+    font:13px/1.6 var(--mono);white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+  .stats{margin-top:10px;color:var(--mut);font-size:11.5px}
+  .banner{margin-top:12px;padding:9px 11px;border-radius:8px;border:1px solid var(--line);background:#fbf6ec;
+    font-size:12px;color:var(--ink-2)}
+  .banner.bad{border-color:#d8a08f;background:#fdeee9;color:#8e3524}
+  .banner.good{border-color:#a9c6ae;background:#f0f7f1;color:#3f6549}
+
+  footer{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);color:var(--mut);font-size:11.5px;
+    display:flex;gap:10px;flex-wrap:wrap}
+  code{background:#f3ead9;border:1px solid var(--line);border-radius:4px;padding:1px 4px;font-size:11.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="spool" aria-hidden="true"></span>
+    <div>
+      <h1>Clip Loom</h1>
+      <div class="sub">clipboard programs you can read · Weft-8 · on your device</div>
+    </div>
+    <div class="r">
+      <a href="../">about</a><span>·</span>
+      <a href="https://github.com/drsamonline/app-jacquard">the Loom</a>
+    </div>
+  </header>
+
+  <div class="stage">
+    <section class="card">
+      <div class="h">what you copied <span class="n" id="inlen">0 chars</span></div>
+      <div class="b">
+        <textarea id="input" spellcheck="false" aria-label="Text to transform">https://example.com/article?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=spring#comments</textarea>
+        <div class="row">
+          <button class="gh" id="paste">Paste from clipboard</button>
+          <button class="gh" id="clearIn">Clear</button>
+        </div>
+        <p class="note">Nothing is uploaded. The text stays in this tab and the machine reads it one byte at a time.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="h">the program</div>
+      <div class="b">
+        <ul class="pick" id="pick"></ul>
+        <p class="note" id="progNote"></p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="h">what you will paste <span class="n" id="outlen">0 chars</span></div>
+      <div class="b">
+        <div class="out" id="output">—</div>
+        <div class="row">
+          <button id="run">Run the program</button>
+          <button class="gh" id="copy">Copy the result</button>
+        </div>
+        <div class="banner" id="banner">Press “Run the program”.</div>
+        <div class="stats" id="stats"></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="card" style="margin-top:14px">
+    <div class="h">the program, in full <span class="n">assembly · 2 bytes per instruction</span></div>
+    <div class="b"><pre class="src" id="src"></pre></div>
+  </section>
+
+  <footer>
+    <span>Built on the Loom — the Weft-8 machine from
+      <a href="https://github.com/drsamonline/app-jacquard">app-jacquard</a>, byte for byte the same engine</span>
+    <span>·</span><span>© 2026 Dr Sohil Momin</span>
+    <span>·</span><span>PolyForm Noncommercial 1.0.0</span>
+  </footer>
+</div>
+
+<script src="web-kit.js"></script>
+<script src="weft8.js"></script>
+<script src="clip.js"></script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var current = Clip.PROGRAMS[0];
+
+  function renderPick() {
+    var ul = $("pick");
+    ul.innerHTML = "";
+    Clip.PROGRAMS.forEach(function (p) {
+      var li = document.createElement("li");
+      var b = document.createElement("button");
+      b.setAttribute("aria-current", p.id === current.id ? "true" : "false");
+      b.innerHTML = p.name + '<span class="pitch">' + p.pitch + '</span>';
+      b.onclick = function () { current = p; renderPick(); $("src").textContent = p.source; $("progNote").textContent = p.note; };
+      li.appendChild(b);
+      ul.appendChild(li);
+    });
+  }
+
+  function counts() {
+    $("inlen").textContent = $("input").value.length + " chars";
+    $("outlen").textContent = $("output").textContent === "—" ? "0 chars" : $("output").textContent.length + " chars";
+  }
+
+  function banner(msg, kind) {
+    $("banner").className = "banner" + (kind ? " " + kind : "");
+    $("banner").textContent = msg;
+  }
+
+  $("run").onclick = function () {
+    var r = Clip.run(current, $("input").value);
+    if (r.errors && r.errors.length) {
+      banner(r.errors.map(function (e) { return (e.line ? "line " + e.line + ": " : "") + e.message; }).join("\n"), "bad");
+      return;
+    }
+    $("output").textContent = r.output === "" ? "" : r.output;
+    if (r.output === "") $("output").textContent = "";
+    counts();
+    $("stats").textContent = r.bytes.length + " bytes of program · " + r.steps + " steps · " +
+      r.reads + " bytes read · " + (r.halted ? "halted" : "stopped early");
+    if (r.error) banner("Stopped: " + r.error, "bad");
+    else if (r.output === $("input").value) banner("The program changed nothing — that is the honest answer for this input.", "good");
+    else banner("Done. " + $("input").value.length + " characters in, " + r.output.length + " out.", "good");
+  };
+
+  $("copy").onclick = function () {
+    var text = $("output").textContent;
+    if (!text) { banner("There is nothing to copy yet — run a program first.", "bad"); return; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        banner("Copied to the clipboard.", "good");
+      }, function () {
+        banner("The browser refused the clipboard write. Select the result and copy it by hand.", "bad");
+      });
+    } else {
+      banner("This browser has no clipboard access here. Select the result and copy it by hand.", "bad");
+    }
+  };
+
+  $("paste").onclick = function () {
+    if (navigator.clipboard && navigator.clipboard.readText) {
+      navigator.clipboard.readText().then(function (t) {
+        $("input").value = t;
+        counts();
+        banner("Pasted " + t.length + " characters. Press Run.", "good");
+      }, function () {
+        banner("The browser refused to read the clipboard. Click the box and paste with Ctrl+V (or long-press).", "bad");
+      });
+    } else {
+      banner("This browser has no clipboard read here. Click the box and paste with Ctrl+V.", "bad");
+    }
+  };
+
+  $("clearIn").onclick = function () { $("input").value = ""; counts(); banner("Cleared.", ""); };
+  $("input").oninput = counts;
+
+  renderPick();
+  $("src").textContent = current.source;
+  $("progNote").textContent = current.note;
+  counts();
+})();
+</script>
+</body>
+</html>

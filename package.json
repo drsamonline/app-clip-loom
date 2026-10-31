@@ -1,0 +1,15 @@
+{
+  "name": "app-clip-loom",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Clip Loom \u2014 clipboard programs you can read: strip tracking, squeeze spaces, wrap text. Weft-8 on the Loom.",
+  "scripts": {
+    "test": "node test-node.js && node tests/page-smoke.js",
+    "test:engine": "node test-node.js",
+    "test:page": "node tests/page-smoke.js"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  },
+  "license": "SEE LICENSE IN LICENSE"
+}
