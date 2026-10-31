@@ -2,6 +2,12 @@
 
 # Clip Loom
 
+<!-- shot:start -->
+
+![Screenshot](docs/shot.png)
+
+<!-- shot:end -->
+
 **Clean it before you paste it — with programs you can read.**
 
 [![Live demo](https://img.shields.io/badge/live-clean%20a%20link-b4482f?style=flat-square&labelColor=231d16)](https://drsamonline.github.io/app-clip-loom/)
