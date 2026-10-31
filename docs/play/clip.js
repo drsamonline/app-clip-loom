@@ -46,9 +46,9 @@
         "done:   HLT"
       ].join("\n"),
       examples: [
+        { in: "https://example.com/page?utm_source=mail&utm_campaign=x", out: "https://example.com/page" },
         { in: "https://example.com/page", out: "https://example.com/page" },
-        { in: "https://example.com/page", out: "https://example.com/page" },
-        { in: "https://example.com/a", out: "https://example.com/a" },
+        { in: "https://example.com/a?b=1#section", out: "https://example.com/a" },
         { in: "", out: "" }
       ]
     },
@@ -137,8 +137,8 @@
         "done:   HLT"
       ].join("\n"),
       examples: [
-        { in: "https://example.com/a", out: "https://example.com/a" },
-        { in: "https://example.com/a", out: "https://example.com/a" },
+        { in: "https://example.com/a?b=1#section", out: "https://example.com/a" },
+        { in: "https://example.com/a#section", out: "https://example.com/a" },
         { in: "https://example.com/a", out: "https://example.com/a" }
       ]
     }

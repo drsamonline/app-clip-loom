@@ -79,7 +79,7 @@ console.log("the programs bite — a broken one is caught");
   /* remove the ? comparison from strip-query: the query must survive, so the
    * example that says it should not must fail. */
   const broken = Clip.programById("strip-query").source.replace(/LDI 0x3F[^\n]*\n/, "LDI 0x00\n");
-  const r = Clip.run({ source: broken }, "https://example.com/page");
+  const r = Clip.run({ source: broken }, "https://example.com/page?utm_source=mail");
   ok(r.output.indexOf("?") >= 0, "with the '?' test removed the query survives — so the example really tests it");
 }
 {

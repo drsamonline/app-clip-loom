@@ -2,20 +2,14 @@
 
 # Clip Loom
 
-<!-- shot:start -->
-
-![Screenshot](docs/shot.png)
-
-<!-- shot:end -->
-
 **Clean it before you paste it — with programs you can read.**
 
-[![Live demo](https://img.shields.io/badge/live-clean%20a%20link-b4482f
-[![Test](https://img.shields.io/github/actions/workflow/status/drsamonline/app-clip-loom/test.yml
-[![Build + deploy](https://img.shields.io/github/actions/workflow/status/drsamonline/app-clip-loom/build-apps.yml
-[![Release](https://img.shields.io/github/v/release/drsamonline/app-clip-loom
-[![Licence](https://img.shields.io/badge/licence-PolyForm%20Noncommercial%201.0.0-4f7a5c
-[![Built on the Loom](https://img.shields.io/badge/built%20on-the%20Loom%20(app--jacquard)-b4482f
+[![Live demo](https://img.shields.io/badge/live-clean%20a%20link-b4482f?style=flat-square&labelColor=231d16)](https://drsamonline.github.io/app-clip-loom/)
+[![Test](https://img.shields.io/github/actions/workflow/status/drsamonline/app-clip-loom/test.yml?branch=main&style=flat-square&label=tests&labelColor=231d16)](https://github.com/drsamonline/app-clip-loom/actions/workflows/test.yml)
+[![Build + deploy](https://img.shields.io/github/actions/workflow/status/drsamonline/app-clip-loom/build-apps.yml?branch=main&style=flat-square&label=build&labelColor=231d16)](https://github.com/drsamonline/app-clip-loom/actions/workflows/build-apps.yml)
+[![Release](https://img.shields.io/github/v/release/drsamonline/app-clip-loom?style=flat-square&labelColor=231d16&color=b4482f)](https://github.com/drsamonline/app-clip-loom/releases/latest)
+[![Licence](https://img.shields.io/badge/licence-PolyForm%20Noncommercial%201.0.0-4f7a5c?style=flat-square&labelColor=231d16)](LICENSE)
+[![Built on the Loom](https://img.shields.io/badge/built%20on-the%20Loom%20(app--jacquard)-b4482f?style=flat-square&labelColor=231d16)](https://github.com/drsamonline/app-jacquard)
 
 [**Open the tool →**](https://drsamonline.github.io/app-clip-loom/)
 
