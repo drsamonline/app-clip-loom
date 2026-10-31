@@ -104,6 +104,15 @@ console.log("the programs bite — a broken one is caught");
   ok(readme.indexOf("you are here") > 0, "and marks this repository in it");
 }
 
+
+/* the copy counts what the data holds — so a new level cannot leave the page lying */
+{
+  const fsc = require("fs");
+  const land = fsc.readFileSync("./docs/index.html", "utf8");
+  ok(land.indexOf("five programs") >= 0, "the landing page states the right count: five programs");
+  ok(Clip.PROGRAMS.length === 5, "and the data really has that many");
+}
+
 console.log("");
 console.log(pass + " passed, " + failures.length + " failed");
 if (failures.length) { failures.forEach(f => console.log("  - " + f)); process.exit(1); }
