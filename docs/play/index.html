@@ -8,8 +8,11 @@
 <meta name="theme-color" content="#f7f1e6">
 <style>
   :root{
-    --linen:#f7f1e6; --linen-2:#efe6d6; --ink:#231d16; --ink-2:#4a3f33; --mut:#7c6c58;
+    --linen:#f7f1e6; --linen-2:#efe6d6; --ink:#231d16; --ink-2:#4a3f33; --mut:#6f604d;
     --thread:#b4482f; --thread-2:#8e3524; --sage:#4f7a5c; --line:#dbcdb6; --card:#fffaf0;
+    /* the label that sits ON --thread. It flips with the surface: #e07a5f is light,
+       so a fixed #fff8f0 label measured 2.8:1 there. */
+    --on-thread:#fff8f0;
     --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
   }
@@ -37,11 +40,11 @@
   .card .h .n{margin-left:auto;color:var(--thread);letter-spacing:0;text-transform:none;font-weight:500}
   .card .b{padding:12px}
 
-  textarea{width:100%;height:250px;border:1px solid var(--line);border-radius:8px;background:#fffdf8;
+  textarea{width:100%;height:250px;border:1px solid var(--line);border-radius:8px;background:var(--card);
     color:var(--ink);padding:11px;font:13px/1.6 var(--mono);resize:vertical;white-space:pre-wrap}
   .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
   button{font:600 12.5px/1 var(--mono);border-radius:7px;padding:10px 13px;cursor:pointer;border:1px solid var(--thread);
-    background:var(--thread);color:#fff8f0}
+    background:var(--thread);color:var(--on-thread)}
   button:hover{background:var(--thread-2);border-color:var(--thread-2)}
   button.gh{background:transparent;color:var(--ink-2);border:1px solid var(--line)}
   button.gh:hover{border-color:var(--thread);color:var(--thread);background:transparent}
@@ -51,31 +54,31 @@
   .pick li{margin:0 0 8px}
   .pick button{width:100%;text-align:left;background:transparent;border:1px solid var(--line);color:var(--ink);
     padding:10px 11px;border-radius:8px;font:600 12.5px/1.35 var(--mono)}
-  .pick button:hover{border-color:var(--thread);background:#fff5ea}
-  .pick button[aria-current="true"]{border-color:var(--thread);background:#fdeee6;box-shadow:inset 3px 0 0 var(--thread)}
+  .pick button:hover{border-color:var(--thread);background:var(--linen-2)}
+  .pick button[aria-current="true"]{border-color:var(--thread);background:var(--linen-2);box-shadow:inset 3px 0 0 var(--thread)}
   .pick .pitch{display:block;color:var(--mut);font:400 11.5px/1.45 var(--mono);margin-top:4px}
 
   .note{color:var(--mut);font-size:12px;margin:10px 0 0}
-  pre.src{margin:0;background:#fbf6ec;border:1px solid var(--line);border-radius:8px;padding:11px;
+  pre.src{margin:0;background:var(--linen-2);border:1px solid var(--line);border-radius:8px;padding:11px;
     font:12px/1.7 var(--mono);color:var(--ink-2);overflow:auto;max-height:260px;white-space:pre}
-  .out{background:#fffdf8;border:1px solid var(--line);border-radius:8px;padding:11px;min-height:250px;
+  .out{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:11px;min-height:250px;
     font:13px/1.6 var(--mono);white-space:pre-wrap;word-break:break-word;color:var(--ink)}
   .stats{margin-top:10px;color:var(--mut);font-size:11.5px}
-  .banner{margin-top:12px;padding:9px 11px;border-radius:8px;border:1px solid var(--line);background:#fbf6ec;
+  .banner{margin-top:12px;padding:9px 11px;border-radius:8px;border:1px solid var(--line);background:var(--linen-2);
     font-size:12px;color:var(--ink-2)}
   .banner.bad{border-color:#d8a08f;background:#fdeee9;color:#8e3524}
   .banner.good{border-color:#a9c6ae;background:#f0f7f1;color:#3f6549}
 
   footer{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);color:var(--mut);font-size:11.5px;
     display:flex;gap:10px;flex-wrap:wrap}
-  code{background:#f3ead9;border:1px solid var(--line);border-radius:4px;padding:1px 4px;font-size:11.5px}
+  code{background:var(--linen-2);border:1px solid var(--line);border-radius:4px;padding:1px 4px;font-size:11.5px}
 
 
   :root[data-theme="dark"]{
     color-scheme: dark;
     --linen:#14110c; --linen-2:#1b160f; --card:#1b160f;
     --ink:#eee6da; --ink-2:#b9ab99; --mut:#8d7f6c;
-    --thread:#e07a5f; --line:#2f281f;
+    --thread:#e07a5f; --line:#2f281f; --on-thread:#2b1209;
   }
 
   /* ICON ONLY, inside the header. A text chip needs ~70px and these rows are full. */
