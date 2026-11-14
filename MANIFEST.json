@@ -9,16 +9,16 @@
       "at": "2026-11-04T19:42:23Z"
     },
     "docs/index.html": {
-      "sha": "df6ab43258fa4c5380877d56a10aeefb5ed0aec9",
-      "producer": "bootstrap@2026-11-04",
-      "class": "generated",
-      "at": "2026-11-06T18:55:38Z"
+      "sha": "b1facae54d6e8e71793bcf43a4f5ca32a538a4ee",
+      "producer": "human",
+      "class": "hand",
+      "at": "2026-11-14T18:06:16Z"
     },
     "docs/play/index.html": {
-      "sha": "adcbdef02e57abaa392ef1a62add8f3805104f16",
-      "producer": "bootstrap@2026-11-04",
-      "class": "generated",
-      "at": "2026-11-07T03:52:06Z"
+      "sha": "d24de9a6bfcc3db60349f400aa29eb1ea4f5c324",
+      "producer": "human",
+      "class": "hand",
+      "at": "2026-11-14T18:06:16Z"
     },
     ".github/workflows/build-apps.yml": {
       "sha": "dd953dea3fc1463e73d327981ba6c60397e1b301",
@@ -27,5 +27,5 @@
       "at": "2026-11-10T15:10:53Z"
     }
   },
-  "updated": "2026-11-10T15:10:53Z"
+  "updated": "2026-11-14T18:06:16Z"
 }
